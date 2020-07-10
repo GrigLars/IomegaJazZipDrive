@@ -139,7 +139,7 @@ It's not mounted... is it even listed as a block device?
     sr0     11:0    1  1024M  0 rom  
     sr1     11:1    1  1024M  0 rom  
     
-It is!  Still /dev/sdb.  And now it shows us 96MB of space, which is fine for an empty disk we have mounted. What if we manually mount it?
+It is!  Still /dev/sdb.  And now it shows us 74MB of space, which is fine for an disk with some files on it that we have mounted. What if we manually mount it as a device like you would for USB or an old floppy?
 
     user@localtoast-:~$ sudo mount /dev/sdb /zip
     
@@ -152,7 +152,7 @@ It is!  Still /dev/sdb.  And now it shows us 96MB of space, which is fine for an
     tmpfs           5.0M     0  5.0M   0% /run/lock
     tmpfs           249M     0  249M   0% /sys/fs/cgroup
     tmpfs            50M     0   50M   0% /run/user/1000
-    /dev/sdb         94M     0   94M   0% /zip
+    /dev/sdb         94M   20M   75M  21% /zip
 
 There we go!  User is part of the group **floppy** which the instructions tell us. We launch the jazip and... get an ancient X-windows tool that looks like it was created with Mac OS in the mid 1990s.  I mean, look at this thing:
 
