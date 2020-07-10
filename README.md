@@ -29,7 +29,7 @@ It had 512mb RAM still not stolen out of it, 20gb hard drive, and a 1.8gz Pentiu
     [    2.101347] scsi 0:0:1:0: Direct-Access     IOMEGA   ZIP 100          13.A PQ: 0 ANSI: 5
 
 
-Thankfully, someone had this problem before, probably when debian was still on 20 floppies. They created a set of libraries and a tool called jazzip.
+Thankfully, someone had this problem before, probably when debian was still on 20 floppies. They created a set of libraries and a tool called **jazip**.
 
     user@localtoast-:~$ sudo apt search iomega
     Sorting... Done
@@ -76,4 +76,85 @@ The first error was it couldn't open our diosplay, but that's because we were co
 
     Can't read configuration file /etc/jazip.conf.
 
-Luckily, [there are manpages](https://www.google.com "there are manpages")
+Luckily, [there are manpages](https://www.google.com "there are manpages"), and they tell us we need to make a conf file:
+
+    user@localtoast-:~$ sudo jazipconfig
+    There are currently no entries in /etc/jazip.conf.
+
+    There are no Zip devices detected on the system.
+
+    There are no Jaz devices detected on the system.
+
+    Available commands:
+     (c)reate an entry from scratch.
+     (q)uit without saving.
+     (e)xit and save changes.
+                               ? c
+
+    Note: Do not specify partition number in device.
+    What device do you want to add? (e.g. /dev/sda) /dev/sdb
+
+    What mount point? (e.g. /zip) /zip
+    --------------------------------------------
+    These are the entries currently selected for /etc/jazip.conf:
+
+      1:   Device /dev/sdb   Mount point /zip
+
+    There are no Zip devices detected on the system.
+
+    There are no Jaz devices detected on the system.
+
+    Available commands:
+     (d)elete an entry from /etc/jazip.conf
+     (c)reate an entry from scratch.
+     (q)uit without saving.
+     (e)xit and save changes.
+                               ? e
+
+    Mount point /zip does not exist. Create it? (y/n) [y]: y
+    Creating /etc/jazip.conf
+
+Wait, what? It can't detect any drives?  Was that old Egyptian man lying?  Did he sell us a dud?
+
+    user@localtoast-:~$ df -h
+    Filesystem      Size  Used Avail Use% Mounted on
+    udev            240M     0  240M   0% /dev
+    tmpfs            50M  1.9M   48M   4% /run
+    /dev/sda2       7.7G  2.5G  4.8G  35% /
+    tmpfs           249M     0  249M   0% /dev/shm
+    tmpfs           5.0M     0  5.0M   0% /run/lock
+    tmpfs           249M     0  249M   0% /sys/fs/cgroup
+    tmpfs            50M     0   50M   0% /run/user/1000
+    
+It's not mounted... is it even listed as a block device?
+
+    user@localtoast-:~$ lsblk
+    NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+    sda      8:0    0    19G  0 disk 
+    ├─sda1   8:1    0  10.8G  0 part 
+    ├─sda2   8:2    0   7.9G  0 part /
+    ├─sda3   8:3    0     1K  0 part 
+    └─sda5   8:5    0 384.3M  0 part [SWAP]
+    sdb      8:16   1    96M  0 disk 
+    sr0     11:0    1  1024M  0 rom  
+    sr1     11:1    1  1024M  0 rom  
+    
+It is!  Still /dev/sdb.  And now it shows us 96MB of space, which is fine for an empty disk we have mounted. What if we manually mount it?
+
+    user@localtoast-:~$ sudo mount /dev/sdb /zip
+    
+    puser@localtoast-:~$ df -h
+    Filesystem      Size  Used Avail Use% Mounted on
+    udev            240M     0  240M   0% /dev
+    tmpfs            50M  3.1M   47M   7% /run
+    /dev/sda2       7.7G  2.5G  4.8G  35% /
+    tmpfs           249M     0  249M   0% /dev/shm
+    tmpfs           5.0M     0  5.0M   0% /run/lock
+    tmpfs           249M     0  249M   0% /sys/fs/cgroup
+    tmpfs            50M     0   50M   0% /run/user/1000
+    /dev/sdb         94M     0   94M   0% /zip
+
+There we go!  User is part of the group **floppy** which the instructions tell us. We launch the jazip and... get an ancient X-windows tool that looks like it was created with Mac OS in the mid 1990s.  I mean, look at this thing:
+
+
+
