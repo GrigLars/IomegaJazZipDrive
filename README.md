@@ -135,7 +135,7 @@ It's not mounted... is it even listed as a block device?
     ├─sda2   8:2    0   7.9G  0 part /
     ├─sda3   8:3    0     1K  0 part 
     └─sda5   8:5    0 384.3M  0 part [SWAP]
-    sdb      8:16   1    96M  0 disk 
+    sdb      8:16   1    74M  0 disk 
     sr0     11:0    1  1024M  0 rom  
     sr1     11:1    1  1024M  0 rom  
     
@@ -152,7 +152,7 @@ It is!  Still /dev/sdb.  And now it shows us 74MB of space, which is fine for an
     tmpfs           5.0M     0  5.0M   0% /run/lock
     tmpfs           249M     0  249M   0% /sys/fs/cgroup
     tmpfs            50M     0   50M   0% /run/user/1000
-    /dev/sdb         94M   20M   75M  21% /zip
+    /dev/sdb         94M   20M   74M  21% /zip
 
 There we go!  User is part of the group **floppy** which the instructions tell us. We launch the jazip and... get an ancient X-windows tool that looks like it was created with Mac OS in the mid 1990s.  I mean, look at this thing:
 
