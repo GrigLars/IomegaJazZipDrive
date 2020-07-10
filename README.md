@@ -159,5 +159,5 @@ There we go!  User is part of the group **floppy** which the instructions tell u
 Reference-style: 
 ![This is the kind of thing you'd expect a weird old man to sell you][logo]
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "This is the kind of thing you'd expect a weird old man to sell you"
+[logo]: https://raw.githubusercontent.com/GrigLars/IomegaJazZipDrive/d419ff21ac183f9f17fc2c598c52f12d6710dad4/jazip_screenshot.png "This is the kind of thing you'd expect a weird old man to sell you"
 
