@@ -181,4 +181,4 @@ So that's it.  I am not sure how the parallel Zip drives work, I assume that's a
 7. Rescue files before your Zip Drive gets the [Click of Death](https://en.wikipedia.org/wiki/Click_of_death#Iomega_Zip_drives "Click of Death")
 8. Never return to this document, because you won't need to.  We Hope.
 
-
+Dedicated to former employee, Stew Huminski, who was crushed when an old server rack of old VT 100 terminal servers fell on him for some reason.
