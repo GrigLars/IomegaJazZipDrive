@@ -156,5 +156,8 @@ It is!  Still /dev/sdb.  And now it shows us 96MB of space, which is fine for an
 
 There we go!  User is part of the group **floppy** which the instructions tell us. We launch the jazip and... get an ancient X-windows tool that looks like it was created with Mac OS in the mid 1990s.  I mean, look at this thing:
 
+Reference-style: 
+![This is the kind of thing you'd expect a weird old man to sell you][logo]
 
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "This is the kind of thing you'd expect a weird old man to sell you"
 
