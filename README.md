@@ -1,4 +1,4 @@
-# How to Mount an Anicent Iomega Zip100 Drive on Debian
+# How to Mount an Anicent Iomega Zip100 Drive on Debian Linux
 
 This is in case anyone else runs into this crazyiness.  It's cobbled together from a variety of sources and my own experience.  This has been tested to work on:
 
@@ -143,7 +143,7 @@ It is!  Still /dev/sdb.  And now it shows us 96MB of space, which is fine for an
 
     user@localtoast-:~$ sudo mount /dev/sdb /zip
     
-    puser@localtoast-:~$ df -h
+    user@localtoast-:~$ df -h
     Filesystem      Size  Used Avail Use% Mounted on
     udev            240M     0  240M   0% /dev
     tmpfs            50M  3.1M   47M   7% /run
@@ -156,8 +156,29 @@ It is!  Still /dev/sdb.  And now it shows us 96MB of space, which is fine for an
 
 There we go!  User is part of the group **floppy** which the instructions tell us. We launch the jazip and... get an ancient X-windows tool that looks like it was created with Mac OS in the mid 1990s.  I mean, look at this thing:
 
-Reference-style: 
 ![This is the kind of thing you'd expect a weird old man to sell you][logo]
 
-[logo]: https://raw.githubusercontent.com/GrigLars/IomegaJazZipDrive/d419ff21ac183f9f17fc2c598c52f12d6710dad4/jazip_screenshot.png "This is the kind of thing you'd expect a weird old man to sell you"
+[logo]: https://raw.githubusercontent.com/GrigLars/IomegaJazZipDrive/d419ff21ac183f9f17fc2c598c52f12d6710dad4/jazip_screenshot.png "This is the kind of thing you'd expect a weird old man to sell you from a folding card table next to a van that said PYRAMIDS ARE AWESOME"
+
+Like CDE on a NeXT box.  Yeesh.  And all it does it lock, unlock, and eject the disk.  I needed to read files from it and delete them, if possible.  Thankfully, mounting the drive did just that.
+
+    user@localtoast-:~$ ls -alh /zip
+    total 20M
+    drwxr-xr-x  2 root root  16K Jul  9 21:25 .
+    drwxr-xr-x 22 root root 4.0K Jul  9 20:22 ..
+    -rwxr-xr-x  1 root root  19M Jul  9 21:24 hacker.bin
+    -rwxr-xr-x  1 root root 141K Jul  9 21:25 missing_nixon.tar
+    -rwxr-xr-x  1 root root 700K Jul  9 21:23 secrets.doc
+
+So that's it.  I am not sure how the parallel Zip drives work, I assume that's a LPT channel, probably mapped to SCSI or something.  So, in summary:
+
+1. Install drive in the manner which it needs
+2. Make sure the device is found, and what device it is (ours was */dev/sdb*, yours may vary)
+3. Make sure there's a disk in it
+4. Install **jazip** on your Linux OS
+5. Mount the drive
+6. You should see any files that are on the disk
+7. Rescue files before your Zip Drive gets the [Click of Death](https://en.wikipedia.org/wiki/Click_of_death#Iomega_Zip_drives "Click of Death")
+8. Never return to this document, because you won't need to.  We Hope.
+
 
